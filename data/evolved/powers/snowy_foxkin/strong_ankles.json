@@ -1,0 +1,14 @@
+{
+    "name": "Strong Ankles",
+    "description": "Jump three times as high while sprinting.",
+
+    "type": "origins:modify_jump",
+    "modifier": {
+        "operation": "addition",
+        "value": 0.2
+    },
+
+    "condition": {
+        "type": "origins:sprinting"
+    }
+}

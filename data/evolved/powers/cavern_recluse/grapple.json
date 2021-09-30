@@ -1,0 +1,139 @@
+{
+	"name": "Grappling Web",
+	"description": "By pressing your PRIMARY ACTIVE key, you shoot out a string of web that latches onto the first web it hits. Upon landing, you are pulled in its direction. Press SPACE while grappling to cancel early",
+
+	"type": "origins:multiple",
+
+	"activate": {
+		"type": "origins:active_self",
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [{
+					"type": "origins:execute_command",
+					"command": "function evolved:origins/cavern_recluse/grapple/start",
+					"permission_level": 4
+				},
+				{
+					"type": "origins:change_resource",
+					"resource": "*:*_display",
+					"change": 1
+				}
+			]
+		},
+		"key": {
+			"key": "key.origins.primary_active",
+			"continuous": false
+		},
+		"cooldown": 40,
+		"hud_render": {
+			"should_render": false
+		},
+		"condition": {
+			"type": "origins:and",
+			"conditions": [{
+					"type": "origins:resource",
+					"resource": "*:*_long_cooldown",
+					"comparison": "==",
+					"compare_to": 0
+				},
+				{
+					"type": "origins:resource",
+					"resource": "*:*_short_cooldown",
+					"comparison": "==",
+					"compare_to": 0
+				}
+			]
+		}
+	},
+
+	"propel_cancel": {
+		"type": "origins:active_self",
+		"entity_action": {
+			"type": "origins:execute_command",
+			"command": "execute if entity @s[tag=ev.cavern_recluse.grapple.propel] run tag @s add ev.cavern_recluse.grapple.cancel",
+			"permission_level": 4
+		},
+		"key": {
+			"key": "key.jump",
+			"continuous": false
+		},
+		"cooldown": 2,
+		"hud_render": {
+			"should_render": false
+		}
+	},
+
+	"long_cooldown": {
+		"type": "origins:cooldown",
+		"cooldown": 240,
+		"hud_render": {
+			"should_render": true,
+			"bar_index": 3
+		}
+	},
+
+	"short_cooldown": {
+		"type": "origins:cooldown",
+		"cooldown": 40,
+		"hud_render": {
+			"should_render": true,
+			"bar_index": 3
+		}
+	},
+
+	"display": {
+		"type": "origins:resource",
+		"min": 0,
+		"max": 1,
+		"hud_render": {
+			"should_render": true,
+			"sprite_location": "origins:textures/gui/community/spiderkolo/resource_bar_01.png",
+			"condition": {
+				"type": "origins:resource",
+				"resource": "*:*_display",
+				"comparison": "==",
+				"compare_to": 1
+			}
+		}
+	},
+
+	"toggle_motion": {
+		"type": "origins:resource",
+		"min": 0,
+		"max": 1,
+		"hud_render": {
+			"should_render": false
+		}
+	},
+
+	"motion": {
+		"type": "origins:action_over_time",
+		"interval": 1,
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [{
+					"type": "origins:add_velocity",
+					"z": 1,
+					"set": true,
+					"space": "local"
+				},
+				{
+					"type": "origins:apply_effect",
+					"effect": {
+						"effect": "minecraft:levitation",
+						"show_icon": false,
+						"show_particles": false,
+						"duration": 3,
+						"amplifier": -1
+					}
+				}
+			]
+		},
+		"condition": {
+			"type": "origins:resource",
+			"resource": "*:*_toggle_motion",
+			"comparison": "==",
+			"compare_to": 1
+		}
+	}
+}

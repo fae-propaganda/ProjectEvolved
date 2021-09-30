@@ -1,0 +1,10 @@
+{
+	"powers": [
+        "evolved:rift_walker/rift_jump"
+	],
+	"icon": "minecraft:nether_star",
+	"order": 10,
+	"impact": 0,
+	"name": "Rift Walker",
+	"description": "filler"
+}

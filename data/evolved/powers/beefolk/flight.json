@@ -1,0 +1,96 @@
+{
+    "name": "Bee Flight",
+    "description": "Your bee ancestry provides temporary flight by holding SPACE.",
+
+    "type": "origins:multiple",
+
+    "energy": {
+        "type": "origins:resource",
+        "min": 0,
+        "max": 5,
+        "start_value": 20,
+        "hud_render": {
+            "should_render": true,
+            "bar_index": 4
+        }
+    },
+
+    "is_flying": {
+        "type": "origins:resource",
+        "min": 0,
+        "max": 1,
+        "hud_render": {
+            "should_render": false
+        }
+    },
+
+    "update": {
+        "type": "origins:action_over_time",
+        "interval": 1,
+        "entity_action": {
+            "type": "origins:change_resource",
+            "resource": "evolved:beefolk/flight_is_flying",
+            "change": -1
+        }
+    },
+
+    "fly": {
+        "type": "origins:active_self",
+        "key": {
+            "key": "key.jump",
+            "continuous": true
+        },
+        "cooldown": 1,
+        "hud_render": {
+            "should_render": false
+        },
+
+        "condition": {
+            "type": "origins:resource",
+            "resource": "evolved:beefolk/flight_energy",
+            "comparison": ">=",
+            "compare_to": 2
+        },
+
+        "entity_action": {
+            "type": "origins:and",
+            "actions": [
+                {
+                    "type": "origins:apply_effect",
+                    "effect": {
+                        "effect": "minecraft:levitation",
+                        "duration": 3,
+                        "amplifier": 2,
+                        "is_ambient": true,
+                        "show_particles": false,
+                        "show_icon": false
+                    }
+                },
+                {
+                    "type": "origins:change_resource",
+                    "resource": "evolved:beefolk/flight_energy",
+                    "change": -2
+                },
+                {
+                    "type": "origins:change_resource",
+                    "resource": "evolved:beefolk/flight_is_flying",
+                    "change": 1
+                }
+            ]
+        }
+
+    },
+
+    "rest_wings": {
+        "type": "origins:action_over_time",
+        "interval": 1,
+
+        "entity_action": {
+            "type": "origins:change_resource",
+            "resource": "evolved:beefolk/flight_energy",
+            "change": 2
+        }
+    }
+
+
+}

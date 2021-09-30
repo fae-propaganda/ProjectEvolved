@@ -1,0 +1,166 @@
+{
+    "type":"origins:multiple",
+    "float_time": {
+        "type": "origins:resource",
+        "min": 0,
+        "max": 50,
+        "hud_render": {
+            "should_render": true
+        }
+    },
+    "number_of_jumps": {
+        "type": "origins:resource",
+        "min": 0,
+        "max": 1,
+        "hud_render": {
+            "should_render": false
+        }
+    },
+    "jump_reset": {
+        "type":"origins:action_over_time",
+        "interval": 1,
+        "entity_action": {
+            "type": "origins:and",
+            "actions": [
+                {
+                    "type": "origins:change_resource",
+                    "resource": "*:*_number_of_jumps",
+                    "change": 1
+                },
+                {
+                    "type": "origins:change_resource",
+                    "resource": "*:*_float_time",
+                    "change": 5
+                }
+            ]
+
+        },
+        "condition":{
+            "type":"origins:on_block"
+        }
+    },
+    "activating_jump": {
+        "type":"origins:active_self",
+        "key": {
+            "key":"key.jump"
+        },
+        "cooldown": 0,
+        "hud_render": {
+            "should_render": false
+        },
+        "condition": {
+            "type":"origins:and",
+            "conditions": [
+                {
+                    "type":"origins:on_block",
+                    "inverted": true
+                },
+                {
+                    "type": "origins:resource",
+                    "resource": "*:*_number_of_jumps",
+                    "comparison": ">",
+                    "compare_to": 0
+                },
+                {
+                    "type": "origins:fluid_height",
+                    "fluid": "minecraft:water",
+                    "comparison": "==",
+                    "compare_to": 0
+                },
+                {
+                    "type": "origins:fluid_height",
+                    "fluid": "minecraft:lava",
+                    "comparison": "==",
+                    "compare_to": 0
+
+                }
+            ]
+        },
+        "entity_action": {
+            "type": "origins:and",
+            "actions": [
+                {
+                    "type": "origins:if_else",
+                    "condition": {
+                        "type": "origins:resource",
+                        "resource": "*:*_number_of_jumps",
+                        "comparison": ">",
+                        "compare_to": 0
+                    },
+                    "if_action": {
+                        "type": "origins:and",
+                        "actions": [
+                            {
+                                "type": "origins:add_velocity",
+                                "set": true,
+                                "space": "world",
+                                "y": 0.5
+                            },
+                            {
+                                "type": "origins:add_velocity",
+                                "space": "local",
+                                "z": 0.1
+                            }
+                        ]
+                    }
+                },
+                {
+                    "type": "origins:change_resource",
+                    "resource": "*:*_number_of_jumps",
+                    "change": -1
+                }
+            ]
+        }
+    },
+    "levitate": {
+        "type":"origins:active_self",
+        "cooldown": 1,
+        "hud_render": {
+            "should_render": false
+        },
+        "key": {
+            "key":"key.jump",
+            "continuous": true
+        },
+        "entity_action": {
+            "type": "origins:and",
+            "actions": [
+                {
+                    "type": "origins:apply_effect",
+                    "effect": {
+                        "effect":"minecraft:levitation",
+                        "show_icon": false,
+                        "show_particles": false,
+                        "duration": 3,
+                        "amplifier": -1
+                    }
+                },
+                {
+                    "type": "origins:change_resource",
+                    "resource": "*:*_float_time",
+                    "change": -1
+                }
+            ]
+
+        },
+        "condition": {
+            "type": "origins:and",
+            "conditions": [
+                {
+                    "type": "origins:resource",
+                    "resource": "*:*_number_of_jumps",
+                    "comparison": "==",
+                    "compare_to": 0
+                },
+                {
+                    "type": "origins:resource",
+                    "resource": "*:*_float_time",
+                    "comparison": ">",
+                    "compare_to": 0
+                }
+            ]
+        }
+    },
+    "name":"Aerial Motion",
+    "description":"You have the power to double jump and can levitate"
+}

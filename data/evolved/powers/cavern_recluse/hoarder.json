@@ -1,0 +1,17 @@
+{
+    "name": "Hoarder",
+    "description": "You have extra inventory space. Ores .",
+
+    "type": "origins:inventory",
+    "name": "Ore Sac",
+    "key": {
+        "key": "key.origins.secondary_active"
+    },
+
+
+    "drop_on_death": true,
+    "drop_on_death_filter": {
+        "type": "origins:food",
+        "inverted": true
+    }
+}

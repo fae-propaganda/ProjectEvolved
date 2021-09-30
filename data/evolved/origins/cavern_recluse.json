@@ -1,0 +1,16 @@
+{
+	"powers": [
+	"evolved:cavern_recluse/grapple",
+	"origins:climbing",
+	"origins:carnivore",
+	"origins:arthropod",
+	"origins:master_of_webs",
+	"evolved:cavern_recluse/strong_claws",
+	"evolved:cavern_recluse/hoarder"
+	],
+	"icon": "minecraft:cobweb",
+	"order": 10,
+	"impact": 2,
+	"name": "Cavern Recluse",
+	"description": "Dwellers of the deep abandoned caves. These creatures have adapted to the cold, dark, shadows of their homes."
+}

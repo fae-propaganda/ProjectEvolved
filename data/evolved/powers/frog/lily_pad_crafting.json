@@ -1,0 +1,21 @@
+{
+    "name": "Lily Pad Crafting",
+    "description": "You are able to craft a lily pad by combining two grass in a crafting grid.",
+
+    "type": "origins:recipe",
+    "recipe": {
+        "id": "evolved:frog/lily_pad_crafting",
+        "type": "minecraft:crafting_shapeless",
+        "ingredients": [
+            {
+                "item": "minecraft:grass"
+            },
+            {
+                "item": "minecraft:grass"
+            }
+        ],
+        "result": {
+            "item": "minecraft:lily_pad"
+        }
+    }
+}

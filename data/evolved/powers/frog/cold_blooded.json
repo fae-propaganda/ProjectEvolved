@@ -1,0 +1,29 @@
+{
+    "name": "Cold-Blooded",
+    "description": "Being in cold biomes and the end dimension triple your exhaustion.",
+
+    "type": "origins:modify_exhaustion",
+    "modifier": {
+        "name": "Increased exhaustion",
+        "operation": "multiply_base",
+        "value": 2.0
+    },
+
+    "condition": {
+        "type": "origins:or",
+        "conditions": [
+            {
+                "type": "origins:biome",
+                "condition": {
+                    "type": "origins:temperature",
+                    "comparison": "<",
+                    "compare_to": 0.15
+                }
+            },
+            {
+                "type": "origins:dimension",
+                "dimension": "minecraft:the_end"
+            }
+        ]
+    }
+}

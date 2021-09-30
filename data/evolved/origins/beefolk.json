@@ -1,0 +1,11 @@
+{
+	"powers": [
+		"origins:water_vulnerability",
+		"evolved:beefolk/flight"
+	],
+	"icon": "minecraft:honeycomb",
+	"order": 10,
+	"impact": 0,
+	"name": "Beefolk",
+	"description": "DESCRIPTION HERE"
+}

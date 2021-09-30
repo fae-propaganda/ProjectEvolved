@@ -1,0 +1,31 @@
+{
+    "name": "Strong Claws",
+    "description": "Your claws are capable of digging through stone.",
+
+    "type": "origins:multiple",
+
+    "mine": {
+        "type": "origins:modify_break_speed",
+        "condition": {
+            "type": "origins:using_effective_tool",
+             "inverted": true
+        },
+        "block_condition": {
+            "type": "origins:in_tag",
+            "tag": "origins:natural_stone"
+        },
+        "modifier": {
+            "operation": "multiply_base",
+            "value": 3.0
+        }
+    },
+
+    "harvest": {
+        "type": "origins:modify_harvest",
+        "allow": true,
+        "block_condition": {
+            "type": "origins:in_tag",
+            "tag": "origins:natural_stone"
+        }
+    }
+}

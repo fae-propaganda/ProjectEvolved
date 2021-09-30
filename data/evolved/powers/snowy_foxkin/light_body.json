@@ -1,0 +1,12 @@
+{
+    "name": "Swift",
+    "description": "Your movement speed is 15% faster than normal.",
+
+    "type": "origins:attribute",
+    "modifier": {
+        "name": "Base speed increase",
+        "attribute": "minecraft:generic.movement_speed",
+        "value": 0.15,
+        "operation": "multiply_base"
+    }
+}

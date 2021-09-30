@@ -1,0 +1,41 @@
+{
+    "name": "Nimble",
+    "description": "Your light weight allows you to fall greater distances. The first 10 hearts of fall damage are negated. Any fall damage after that is halved.",
+
+    "type": "origins:multiple",
+
+    "negate": {
+        "type": "origins:action_on_land",
+        "entity_action": {
+            "type": "origins:set_fall_distance",
+            "fall_distance": 0
+        },
+        "condition": {
+            "type": "origins:fall_distance",
+            "comparison": "<=",
+            "compare_to": 13
+        }
+    },
+
+    "reduce": {
+        "type": "origins:modify_damage_taken",
+        "damage_condition": {
+            "type": "origins:name",
+            "name": "fall"
+        },
+
+        "modifiers":
+        [
+            {
+                "operation": "addition",
+                "value": -10
+            },
+            {
+                "operation": "multiply_total",
+                "value": -0.5
+            }
+        ]
+    }
+
+
+}

@@ -1,0 +1,216 @@
+{
+    "name": "Rift Jump",
+    "description": "By pressing your ACTIVE key, you step through to the space between worlds. While in the rift you are undetectable, gain increased mobility and immunity to any form of damage. However, you are unable to interact with the material plane or use items,",
+
+    "type": "origins:multiple",
+
+    "toggle": {
+        "type": "origins:resource",
+        "min": 0,
+        "max": 1,
+        "hud_render": {
+            "should_render": true,
+            "condition": {
+                "type": "origins:resource",
+                "resource": "evolved:rift_walker/rift_jump_toggle",
+                "comparison": "==",
+                "compare_to": 1
+            }
+        },
+        "max_action": {
+            "type": "origins:and",
+            "actions": [
+                {
+                    "type": "origins:apply_effect",
+                    "effect": {
+                        "effect": "minecraft:speed",
+                        "duration": 16,
+                        "amplifier": 10,
+                        "is_ambient": true,
+                        "show_particles": false,
+                        "show_icon": false
+                    }
+                },
+                {
+                    "type": "origins:execute_command",
+                    "command": "particle smoke ~ ~1 ~ .25 .5 .25 .01 50 force",
+                    "permission_level": 4
+
+                },
+                {
+                    "type": "origins:play_sound",
+                    "sound": "minecraft:entity.blaze.shoot",
+                    "volume": 0.25
+                }
+            ]
+        },
+        "min_action": {
+            "type": "origins:and",
+            "actions": [
+                {
+                    "type": "origins:trigger_cooldown",
+                    "power": "evolved:rift_walker/rift_jump_timer"
+                },
+                {
+                    "type": "origins:clear_effect",
+                    "effect": "minecraft:speed"
+                },
+                {
+                    "type": "origins:execute_command",
+                    "command": "particle smoke ~ ~1 ~ .25 .5 .25 .01 50 force",
+                    "permission_level": 4
+                },
+                {
+                    "type": "origins:play_sound",
+                    "sound": "minecraft:entity.blaze.shoot",
+                    "volume": 0.25
+                }
+            ]
+        }
+    },
+
+    "timer": {
+        "type": "origins:cooldown",
+        "cooldown": 120,
+        "hud_render": {
+            "should_render": true,
+            "bar_index": 1
+        }
+    },
+
+    "activate": {
+        "type": "origins:active_self",
+        "cooldown": 5,
+        "hud_render": {
+            "should_render": false
+        },
+
+        "entity_action": {
+            "type": "origins:if_else",
+            "condition": {
+                "type": "origins:and",
+                "conditions": [
+                    {
+                        "type": "origins:resource",
+                        "resource": "evolved:rift_walker/rift_jump_toggle",
+                        "comparison": "==",
+                        "compare_to": 0
+                    },
+                    {
+                        "type": "origins:resource",
+                        "resource": "evolved:rift_walker/rift_jump_timer",
+                        "comparison": "==",
+                        "compare_to": 0
+                    }
+                ]
+            },
+            "if_action": {
+                "type": "origins:and",
+                "actions": [
+                    {
+                        "type": "origins:change_resource",
+                        "resource": "evolved:rift_walker/rift_jump_toggle",
+                        "change": 1
+
+                    },
+                    {
+                        "type": "origins:delay",
+                        "ticks": 16,
+                        "action": {
+                            "type": "origins:change_resource",
+                            "resource": "evolved:rift_walker/rift_jump_toggle",
+                            "change": -1
+                        }
+                    }
+                ]
+            },
+            "else_action": {
+                "type": "origins:change_resource",
+                "resource": "evolved:rift_walker/rift_jump_toggle",
+                "change": -1
+            }
+        }
+    },
+
+    "invisibility": {
+        "type": "origins:invisibility",
+        "render_armor": false,
+        "condition": {
+            "type": "origins:resource",
+            "resource": "evolved:rift_walker/rift_jump_toggle",
+            "comparison": "==",
+            "compare_to": 1
+        }
+    },
+
+    "invulnerability": {
+        "type": "origins:modify_damage_taken",
+        "modifier": {
+            "operation": "multiply_total",
+            "value": -1
+        },
+        "condition": {
+            "type": "origins:resource",
+            "resource": "evolved:rift_walker/rift_jump_toggle",
+            "comparison": "==",
+            "compare_to": 1
+        }
+    },
+
+    "shader": {
+        "type": "origins:shader",
+        "shader": "minecraft:shaders/post/invert.json",
+
+        "condition": {
+            "type": "origins:resource",
+            "resource": "evolved:rift_walker/rift_jump_toggle",
+            "comparison": "==",
+            "compare_to": 1
+        }
+    },
+
+    "prevent_block_selection": {
+        "type": "origins:prevent_block_selection",
+        "condition": {
+            "type": "origins:resource",
+            "resource": "evolved:rift_walker/rift_jump_toggle",
+            "comparison": "==",
+            "compare_to": 1
+        }
+    },
+
+    "prevent_item_use": {
+        "type": "origins:prevent_item_use",
+        "condition": {
+            "type": "origins:resource",
+            "resource": "evolved:rift_walker/rift_jump_toggle",
+            "comparison": "==",
+            "compare_to": 1
+        }
+    },
+
+    "modify_damage": {
+        "type": "origins:modify_damage_dealt",
+        "modifier": {
+            "operation": "multiply_total",
+            "value": -1
+        },
+
+        "condition": {
+            "type": "origins:resource",
+            "resource": "evolved:rift_walker/rift_jump_toggle",
+            "comparison": "==",
+            "compare_to": 1
+        }
+    },
+
+    "extinguish": {
+        "type": "origins:fire_immunity",
+        "condition": {
+            "type": "origins:resource",
+            "resource": "evolved:rift_walker/rift_jump_toggle",
+            "comparison": "==",
+            "compare_to": 1
+        }
+    }
+}

@@ -1,0 +1,343 @@
+{
+    "name": "ACTIVE: Leap",
+    "description": "Your frog legs allow you to jump higher by holding SNEAK.",
+    "type": "origins:multiple",
+
+    "meter": {
+        "type": "origins:resource",
+        "min": 0,
+        "max": 20,
+        "hud_render": {
+            "should_render": true,
+            "bar_index": 2,
+            "condition": {
+                "type": "origins:resource",
+                "resource": "evolved:frog/leap_meter",
+                "comparison": ">",
+                "compare_to": 0
+            }
+        },
+        "max_action": {
+            "type": "origins:execute_command",
+            "command": "playsound minecraft:block.note_block.harp player @s ~ ~ ~ 0.25 2",
+            "permission_level": 4
+        }
+    },
+
+    "delay_timer": {
+        "type": "origins:resource",
+        "min": 0,
+        "max": 20,
+        "hud_render": {
+            "should_render": false,
+            "bar_index": 3,
+            "condition": {
+                "type": "origins:resource",
+                "resource": "evolved:frog/leap_delay_timer",
+                "comparison": ">",
+                "compare_to": 0
+            }
+        },
+        "min_action": {
+            "type": "origins:change_resource",
+            "resource": "evolved:frog/leap_meter",
+            "change": -20
+        }
+    },
+
+    "charge": {
+        "type": "origins:action_over_time",
+        "interval": 1,
+        "condition": {
+            "type": "origins:and",
+              "conditions": [
+                  {
+                      "type": "origins:sneaking"
+                  },
+                  {
+                      "type": "origins:on_block",
+                      "block_condition": {
+                          "type": "origins:movement_blocking"
+                      }
+                  }
+              ]
+        },
+
+        "rising_action": {
+            "type": "origins:and",
+            "actions": [
+                {
+                    "type": "origins:change_resource",
+                    "resource": "evolved:frog/leap_meter",
+                    "change": -20
+                },
+                {
+                    "type": "origins:change_resource",
+                    "resource": "evolved:frog/leap_delay_timer",
+                    "change": -20
+                }
+            ]
+        },
+        "entity_action": {
+            "type": "origins:change_resource",
+            "resource": "evolved:frog/leap_meter",
+            "change": 1
+        }
+
+
+    },
+
+    "delay": {
+        "type": "origins:action_over_time",
+        "interval": 1,
+        "condition": {
+            "type": "origins:and",
+              "conditions": [
+                  {
+                      "type": "origins:power_active",
+                      "power": "evolved:frog/leap_charge",
+                      "inverted": true
+                  },
+                  {
+                      "type": "origins:resource",
+                      "resource": "evolved:frog/leap_meter",
+                      "comparison": ">",
+                      "compare_to": 0
+                  }
+              ]
+        },
+
+        "rising_action": {
+            "type": "origins:change_resource",
+            "resource": "evolved:frog/leap_delay_timer",
+            "change": 20
+        },
+        "entity_action": {
+            "type": "origins:change_resource",
+            "resource": "evolved:frog/leap_delay_timer",
+            "change": -1
+        }
+    },
+
+    "hit_reset": {
+        "type": "origins:self_action_when_hit",
+        "cooldown": 1,
+        "entity_action": {
+            "type": "origins:and",
+            "actions": [
+                {
+                    "type": "origins:change_resource",
+                    "resource": "evolved:frog/leap_meter",
+                    "change": -20
+                },
+                {
+                    "type": "origins:change_resource",
+                    "resource": "evolved:frog/leap_delay_timer",
+                    "change": -20
+                }
+            ]
+        }
+    },
+
+    "jump_reset": {
+        "type": "origins:modify_jump",
+        "entity_action": {
+            "type": "origins:and",
+            "actions": [
+                {
+                    "type": "origins:change_resource",
+                    "resource": "evolved:frog/leap_meter",
+                    "change": -20
+                },
+                {
+                    "type": "origins:change_resource",
+                    "resource": "evolved:frog/leap_delay_timer",
+                    "change": -20
+                }
+            ]
+        }
+    },
+
+    "jump_sound": {
+        "type": "origins:modify_jump",
+        "condition": {
+            "type": "origins:resource",
+            "resource": "evolved:frog/leap_meter",
+            "comparison": ">=",
+            "compare_to": 5
+        },
+        "entity_action": {
+            "type": "origins:and",
+            "actions": [
+                {
+                    "type": "origins:execute_command",
+                    "command": "particle minecraft:cloud ~ ~.5 ~ .5 0 .5 0.05 10 force",
+                    "permission_level": 4
+                },
+                {
+                    "type": "origins:play_sound",
+                    "sound": "minecraft:entity.bat.takeoff",
+                    "volume": 0.2,
+                    "pitch": 0.5
+                }
+            ]
+        }
+    },
+
+    "charge_sound_5": {
+        "type": "origins:action_over_time",
+        "interval": 1,
+        "condition": {
+            "type": "origins:resource",
+            "resource": "evolved:frog/leap_meter",
+            "comparison": ">=",
+            "compare_to": 5
+        },
+        "rising_action": {
+            "type": "origins:execute_command",
+            "command": "playsound minecraft:block.note_block.harp player @s ~ ~ ~ 0.1 0.5",
+            "permission_level": 4
+        }
+    },
+
+    "charge_sound_10": {
+        "type": "origins:action_over_time",
+        "interval": 1,
+        "condition": {
+            "type": "origins:resource",
+            "resource": "evolved:frog/leap_meter",
+            "comparison": ">=",
+            "compare_to": 10
+        },
+        "rising_action": {
+            "type": "origins:execute_command",
+            "command": "playsound minecraft:block.note_block.harp player @s ~ ~ ~ 0.1 1",
+            "permission_level": 4
+        }
+    },
+
+    "charge_sound_15": {
+        "type": "origins:action_over_time",
+        "interval": 1,
+        "condition": {
+            "type": "origins:resource",
+            "resource": "evolved:frog/leap_meter",
+            "comparison": ">=",
+            "compare_to": 15
+        },
+        "rising_action": {
+            "type": "origins:execute_command",
+            "command": "playsound minecraft:block.note_block.harp player @s ~ ~ ~ 0.1 1.5",
+            "permission_level": 4
+        }
+    },
+
+    "modify_5": {
+        "type": "origins:modify_jump",
+        "modifier": {
+            "operation": "addition",
+            "value": 0.35
+        },
+        "entity_action": {
+            "type": "origins:add_velocity",
+            "space": "local",
+            "z": 0.125
+        },
+        "condition": {
+            "type": "origins:and",
+            "conditions": [
+                {
+                    "type": "origins:resource",
+                    "resource": "evolved:frog/leap_meter",
+                    "comparison": ">=",
+                    "compare_to": 5
+                },
+                {
+                    "type": "origins:resource",
+                    "resource": "evolved:frog/leap_meter",
+                    "comparison": "<",
+                    "compare_to": 10
+                }
+            ]
+        }
+    },
+
+    "modify_10": {
+        "type": "origins:modify_jump",
+        "modifier": {
+            "operation": "addition",
+            "value": 0.55
+        },
+        "entity_action": {
+            "type": "origins:add_velocity",
+            "space": "local",
+            "z": 0.25
+        },
+        "condition": {
+            "type": "origins:and",
+            "conditions": [
+                {
+                    "type": "origins:resource",
+                    "resource": "evolved:frog/leap_meter",
+                    "comparison": ">=",
+                    "compare_to": 10
+                },
+                {
+                    "type": "origins:resource",
+                    "resource": "evolved:frog/leap_meter",
+                    "comparison": "<",
+                    "compare_to": 15
+                }
+            ]
+        }
+    },
+
+    "modify_15": {
+        "type": "origins:modify_jump",
+        "modifier": {
+            "operation": "addition",
+            "value": 0.825
+        },
+        "entity_action": {
+            "type": "origins:add_velocity",
+            "space": "local",
+            "z": 0.375
+        },
+        "condition": {
+            "type": "origins:and",
+            "conditions": [
+                {
+                    "type": "origins:resource",
+                    "resource": "evolved:frog/leap_meter",
+                    "comparison": ">=",
+                    "compare_to": 15
+                },
+                {
+                    "type": "origins:resource",
+                    "resource": "evolved:frog/leap_meter",
+                    "comparison": "<",
+                    "compare_to": 20
+                }
+            ]
+        }
+    },
+
+    "modify_20": {
+        "type": "origins:modify_jump",
+        "modifier": {
+            "operation": "addition",
+            "value": 0.975
+        },
+        "entity_action": {
+            "type": "origins:add_velocity",
+            "space": "local",
+            "z": 0.5
+        },
+        "condition": {
+            "type": "origins:resource",
+            "resource": "evolved:frog/leap_meter",
+            "comparison": "==",
+            "compare_to": 20
+        }
+    }
+}

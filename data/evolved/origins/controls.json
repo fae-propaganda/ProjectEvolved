@@ -1,0 +1,10 @@
+{
+	"powers": [
+	"evolved:controls/print"
+	],
+	"icon": "minecraft:anvil",
+	"order": 10,
+	"impact": 0,
+	"name": "Controls",
+	"description": ""
+}

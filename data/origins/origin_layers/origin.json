@@ -1,0 +1,14 @@
+{
+    "replace": true,
+
+    "origins": [
+        "origins:human",
+        "evolved:controls",
+        "evolved:snowy_foxkin",
+        "evolved:cavern_recluse",
+        "evolved:griffin",
+        "evolved:frog",
+        "evolved:rift_walker",
+        "evolved:saryn"
+    ]
+}

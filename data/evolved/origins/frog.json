@@ -1,0 +1,21 @@
+{
+	"powers": [
+		"evolved:frog/wet_skin",
+		"evolved:frog/leap",
+
+		"evolved:frog/cold_blooded",
+		"evolved:frog/nimble",
+		"evolved:frog/lily_pad_crafting",
+
+		"evolved:frog/webbed_feet",
+		"evolved:frog/wet_eyes",
+		"evolved:frog/aquatic",
+		"origins:like_water",
+		"origins:aqua_affinity"
+	],
+	"icon": "minecraft:lily_pad",
+	"order": 10,
+	"impact": 2,
+	"name": "Fwog",
+	"description": "ribet"
+}

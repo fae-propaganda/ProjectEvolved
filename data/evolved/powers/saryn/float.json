@@ -1,0 +1,79 @@
+{
+    "name": "Float",
+    "description": "Hold SPACE while in air to float",
+    "type": "origins:multiple",
+
+    "in_air": {
+        "type": "origins:resource",
+        "min": 0,
+        "max": 1,
+        "hud_render": {
+            "should_render": true
+        }
+    },
+
+    "check_air": {
+        "type": "origins:active_self",
+        "cooldown": 1,
+        "hud_render": {
+            "should_render": false
+        },
+        "key": {
+            "key": "key.jump",
+            "continuous": false
+        },
+        "entity_action": {
+            "type": "origins:change_resource",
+            "resource": "evolved:saryn/float_in_air",
+            "change": 1
+        },
+        "condition": {
+            "type": "origins:on_block",
+            "inverted": true
+        }
+    },
+
+    "reset": {
+        "type": "origins:action_over_time",
+        "interval": 1,
+        "entity_action": {
+            "type": "origins:change_resource",
+            "resource": "evolved:saryn/float_in_air",
+            "change": -1
+        },
+        "condition": {
+            "type": "origins:on_block"
+        }
+    },
+
+    "effect": {
+        "type": "origins:active_self",
+        "cooldown": 1,
+        "hud_render": {
+            "should_render": false
+        },
+        "key": {
+            "key": "key.jump",
+            "continuous": true
+        },
+        "entity_action": {
+            "type": "origins:apply_effect",
+            "effect": {
+                "effect": "minecraft:levitation",
+                "duration": 3,
+                "amplifier": 255,
+                "is_ambient": true,
+                "show_particles": false,
+                "show_icon": false
+            }
+        },
+        "condition": {
+            "type": "origins:resource",
+            "resource": "evolved:saryn/float_in_air",
+            "comparison": "==",
+            "compare_to": 1
+        }
+    }
+
+
+}

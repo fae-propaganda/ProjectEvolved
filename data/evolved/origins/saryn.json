@@ -1,0 +1,10 @@
+{
+	"powers": [
+		"evolved:saryn/aerial_motion"
+	],
+	"icon": "minecraft:brown_mushroom",
+	"order": 10,
+	"impact": 0,
+	"name": "Saryn",
+	"description": "DESCRIPTION HERE"
+}

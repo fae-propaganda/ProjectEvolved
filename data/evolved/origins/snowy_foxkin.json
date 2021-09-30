@@ -1,0 +1,20 @@
+{
+	"powers": [
+		"evolved:snowy_foxkin/acrobatics",
+		"evolved:snowy_foxkin/fox_bite",
+		"evolved:snowy_foxkin/fragile",
+		"evolved:snowy_foxkin/fresh_berries",
+		"evolved:snowy_foxkin/large_appetite",
+		"evolved:snowy_foxkin/light_body",
+		"evolved:snowy_foxkin/night_eyes",
+		"evolved:snowy_foxkin/pounce",
+		"evolved:snowy_foxkin/strong_ankles",
+		"evolved:snowy_foxkin/tiny_fox",
+		"evolved:snowy_foxkin/unwieldly"
+	],
+	"icon": "minecraft:sweet_berries",
+	"order": 10,
+	"impact": 1,
+	"name": "Snowy Foxkin",
+	"description": "Agile hunters waiting for perfect the moment to strike."
+}

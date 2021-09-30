@@ -1,0 +1,26 @@
+{
+	"type": "origins:action_over_time",
+	"interval": 1,
+	"entity_action": {
+		"type": "origins:and",
+		"actions": [
+			{
+				"type": "origins:add_velocity",
+				"z": 1,
+				"set": true,
+				"space": "local"
+			},
+			{
+				"type": "origins:apply_effect",
+				"effect": {
+					"effect":"minecraft:levitation",
+					"show_icon": false,
+					"show_particles": false,
+					"duration": 3,
+					"amplifier": -1
+				}
+			}
+		]
+	},
+	"hidden": true
+}

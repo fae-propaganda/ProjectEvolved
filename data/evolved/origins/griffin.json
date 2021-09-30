@@ -1,0 +1,13 @@
+{
+	"powers": [
+		"origins:elytra",
+        "origins:launch_into_air",
+        "origins:aerial_combatant"
+
+	],
+	"icon": "minecraft:feather",
+	"order": 10,
+	"impact": 0,
+	"name": "Griffin",
+	"description": "DESCRIPTION HERE"
+}

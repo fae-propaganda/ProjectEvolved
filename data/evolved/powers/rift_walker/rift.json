@@ -1,0 +1,37 @@
+{
+    "power_type": "multiple",
+    "condition": {
+        "type": "origins:resource",
+        "resource": "evolved:rift_walker/rift_jump_toggle",
+        "comparison": "==",
+        "compare_to": 1
+    },
+
+    "invisibility": {
+        "type": "origins:invisibility",
+        "render_armor": false
+    },
+
+    "invulnerability": {
+        "type": "origins:modify_damage_taken",
+        "modifier": {
+            "operation": "multiply_total",
+            "value": -1
+        }
+    },
+
+    "shader": {
+        "type": "origins:shader",
+        "shader": "minecraft:shaders/post/invert.json"
+    },
+
+    "prevent_block_selection": {
+        "type": "origins:prevent_block_selection"
+    },
+
+    "prevent_item_use": {
+        "type": "origins:prevent_item_use"
+
+    }
+
+}

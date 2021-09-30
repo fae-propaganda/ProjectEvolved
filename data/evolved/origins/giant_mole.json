@@ -1,0 +1,10 @@
+{
+	"powers": [
+
+	],
+	"icon": "minecraft:air",
+	"order": 10,
+	"impact": 0,
+	"name": "Giant Mole",
+	"description": "Diggy diggy."
+}

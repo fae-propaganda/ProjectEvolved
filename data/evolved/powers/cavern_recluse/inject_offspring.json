@@ -1,0 +1,188 @@
+{
+	"name": "Inject Offspring",
+	"description": "By pressing your ACTIVE key, you ready to inject your offspring. Enemies hit within the next () seconds will gain blindness, slowness, and poison. If the target is killed they will spawn 3 spiderlings.",
+
+	"type": "origins:multiple",
+
+	"toggle": {
+		"type": "origins:resource",
+		"min": 0,
+		"max": 1,
+		"hud_render": {
+			"should_render": true,
+			"condition": {
+				"type": "origins:resource",
+				"resource": "evolved:cavern_recluse/inject_offspring_toggle",
+				"comparison": "==",
+				"compare_to": 1
+			}
+		},
+		"max_action": {
+			"type": "origins:and",
+			"actions": [{
+				"type": "origins:play_sound",
+				"sound": "minecraft:entity.spider.ambient",
+				"volume": 0.25
+			}]
+		},
+		"min_action": {
+			"type": "origins:and",
+			"actions": [{
+				"type": "origins:trigger_cooldown",
+				"power": "evolved:cavern_recluse/inject_offspring_timer"
+			}]
+		}
+	},
+
+	"timer": {
+		"type": "origins:cooldown",
+		"cooldown": 300,
+		"hud_render": {
+			"should_render": true,
+			"bar_index": 1
+		}
+	},
+
+	"activate": {
+		"type": "origins:active_self",
+		"cooldown": 5,
+		"hud_render": {
+			"should_render": false
+		},
+
+		"entity_action": {
+			"type": "origins:if_else",
+			"condition": {
+				"type": "origins:and",
+				"conditions": [{
+						"type": "origins:resource",
+						"resource": "evolved:cavern_recluse/inject_offspring_toggle",
+						"comparison": "==",
+						"compare_to": 0
+					},
+					{
+						"type": "origins:resource",
+						"resource": "evolved:cavern_recluse/inject_offspring_timer",
+						"comparison": "==",
+						"compare_to": 0
+					}
+				]
+			},
+			"if_action": {
+				"type": "origins:and",
+				"actions": [{
+						"type": "origins:change_resource",
+						"resource": "evolved:cavern_recluse/inject_offspring_toggle",
+						"change": 1
+
+					},
+					{
+						"type": "origins:delay",
+						"ticks": 100,
+						"action": {
+							"type": "origins:change_resource",
+							"resource": "evolved:cavern_recluse/inject_offspring_toggle",
+							"change": -1
+						}
+					}
+				]
+			},
+			"else_action": {
+				"type": "origins:change_resource",
+				"resource": "evolved:cavern_recluse/inject_offspring_toggle",
+				"change": -1
+			}
+		}
+	},
+
+	"target_on_hit": {
+		"type": "origins:target_action_on_hit",
+		"condition": {
+			"type": "origins:resource",
+			"resource": "evolved:cavern_recluse/inject_offspring_toggle",
+			"comparison": "==",
+			"compare_to": 1
+		},
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [{
+					"type": "origins:apply_effect",
+					"effects": [{
+							"effect": "minecraft:slowness",
+							"amplifier": 3,
+							"duration": 100
+						},
+						{
+							"effect": "minecraft:blindness",
+							"amplifier": 3,
+							"duration": 100
+						},
+						{
+							"effect": "minecraft:poison",
+							"amplifier": 3,
+							"duration": 100
+						}
+					]
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "tag @s add pe.cavern_recluse.inject",
+					"permission_level": 4
+				}
+			]
+		},
+		"damage_condition": {
+			"type": "origins:name",
+			"name": "player"
+		},
+		"cooldown": 1,
+		"hud_render": {
+			"should_render": true
+		}
+	},
+
+	"self_on_hit": {
+		"type": "origins:self_action_on_hit",
+		"condition": {
+			"type": "origins:resource",
+			"resource": "evolved:cavern_recluse/inject_offspring_toggle",
+			"comparison": "==",
+			"compare_to": 1
+		},
+		"entity_action": {
+			"type": "origins:delay",
+			"ticks": 1,
+			"action": {
+				"type": "origins:change_resource",
+				"resource": "evolved:cavern_recluse/inject_offspring_toggle",
+				"change": -1
+			}
+		},
+		"damage_condition": {
+			"type": "origins:name",
+			"name": "player"
+		},
+		"cooldown": 1,
+		"hud_render": {
+			"should_render": true
+		}
+	},
+
+	"summon": {
+		"type": "origins:action_over_time",
+		"interval": 1,
+		"condition": {
+			"type": "origins:command",
+			"command": "testfor @e[tag=pe.cavern_recluse.inject]",
+			"comparison": "==",
+			"compare_to": 1
+		},
+		"falling_action": {
+			"type": "origins:execute_command",
+			"command": "execute at @e[tag=evolved.cavern_recluse.marker] run function evolved/cavern_recluse/inject/summon",
+			"permission_level": 4
+		}
+
+	}
+
+}

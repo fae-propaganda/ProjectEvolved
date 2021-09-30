@@ -1,0 +1,25 @@
+{
+	"type": "origins:action_over_time",
+	"interval": 1,
+	"entity_action": {
+		"type": "origins:and",
+		"actions": [
+			{
+				"type": "origins:add_velocity",
+				"y": 0.1,
+				"set": true,
+				"space": "world"
+			},
+			{
+				"type": "origins:delay",
+				"ticks": 1,
+				"action": {
+					"type": "origins:execute_command",
+					"command": "power revoke @s evolved:universal/stop",
+					"permission_level": 4
+				}
+			}
+		]
+	},
+	"hidden": true
+}

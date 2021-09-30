@@ -1,0 +1,37 @@
+{
+    "name": "Fresh Berries",
+
+    "description": "Eating sweet berries gives 3 bars of hunger and 7 saturation. You are no longer harmed by sweet berry bushes.",
+
+    "type": "origins:multiple",
+
+    "eat": {
+        "type": "origins:action_on_item_use",
+        "entity_action": {
+            "type": "origins:feed",
+            "food": 4.0,
+            "saturation": 1.7
+        },
+        "item_condition": {
+            "type": "origins:ingredient",
+            "ingredient": {
+                "item": "minecraft:sweet_berries"
+            }
+        }
+    },
+
+    "no_bush_damage": {
+        "type": "origins:modify_damage_taken",
+        "damage_condition": {
+            "type": "origins:name",
+            "name": "sweetBerryBush"
+        },
+
+        "modifier": {
+            "operation": "multiply_total",
+            "value": -1
+        }
+    }
+
+
+}

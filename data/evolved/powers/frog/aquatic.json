@@ -1,0 +1,7 @@
+{
+    "name": "Aquatic",
+    "description": "You belong to the aquatic entity group, hence you receive more damage from impaling.",
+
+    "type": "origins:entity_group",
+    "group": "aquatic"
+}

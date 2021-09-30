@@ -1,0 +1,47 @@
+{
+    "type": "origins:multiple",
+    "name": "Strong Claws",
+    "description": "Your claws are capable of digging through stone.",
+
+    "primary": {
+        "type": "origins:active_self",
+        "key": "key.origins.primary_active",
+        "cooldown": 20,
+        "hud_render": {
+            "should_render": false
+        },
+        "entity_action": {
+            "type": "origins:execute_command",
+            "command": "tellraw @s \"primary\"",
+            "permission_level": 4
+        }
+    },
+
+    "secondary": {
+        "type": "origins:active_self",
+        "key": "key.origins.secondary_active",
+        "cooldown": 20,
+        "hud_render": {
+            "should_render": false
+        },
+        "entity_action": {
+            "type": "origins:execute_command",
+            "command": "tellraw @s \"secondary\"",
+            "permission_level": 4
+        }
+    },
+
+    "swapOffhand": {
+        "type": "origins:active_self",
+        "key": "key.swapOffhand",
+        "cooldown": 20,
+        "hud_render": {
+            "should_render": false
+        },
+        "entity_action": {
+            "type": "origins:execute_command",
+            "command": "tellraw @s \"swapOffhand\"",
+            "permission_level": 4
+        }
+    }
+}

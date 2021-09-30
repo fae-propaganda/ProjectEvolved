@@ -1,0 +1,182 @@
+{
+	"name": "KEYSTONE: Wet Skin",
+	"description": "You need to keep your skin hydrated to breathe.\n\n• Being in water, rain, or sitting in filled cauldrons restore your hydration.\n• Fire resistance prevents your skin from drying out.\n• Drinking water bottles and potions restore a third of your hydration.\n• However, being exposed to direct sunlight or being in the nether dries your skin twice as fast.\n• Being on fire also greatly reduces your hydration.",
+
+	"type": "origins:multiple",
+
+	"hydration": {
+		"type": "origins:resource",
+		"min": 0,
+		"max": 600,
+		"start_value": 0,
+		"hud_render": {
+			"should_render": true,
+			"bar_index": 1
+		}
+	},
+
+
+	"hydrate": {
+		"type": "origins:action_over_time",
+		"interval": 1,
+		"entity_action": {
+			"type": "origins:change_resource",
+			"resource": "evolved:frog/wet_skin_hydration",
+			"change": 2
+		},
+		"condition": {
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:fluid_height",
+					"fluid": "minecraft:water",
+					"comparison": ">",
+					"compare_to": 0
+				},
+				{
+					"type": "origins:in_rain"
+				},
+				{
+					"type": "origins:in_block",
+					"block_condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:block",
+								"block": "minecraft:cauldron"
+							},
+							{
+								"type": "origins:block_state",
+								"property": "level",
+								"comparison": ">",
+								"compare_to": 0
+							}
+						]
+					}
+				}
+			]
+		}
+	},
+
+	"drink" : {
+		"type": "origins:action_on_item_use",
+		"entity_action": {
+			"type": "origins:change_resource",
+			"resource": "evolved:frog/wet_skin_hydration",
+			"change": 200
+		},
+		"item_condition": {
+			"type": "origins:ingredient",
+			    "ingredient": {
+			        "item": "minecraft:potion"
+			    }
+		}
+	},
+
+	"dry": {
+		"type": "origins:action_over_time",
+		"interval": 20,
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:power_active",
+					"power": "evolved:frog/wet_skin_hydrate",
+					"inverted": true
+				},
+				{
+					"type": "origins:status_effect",
+					"effect": "minecraft:fire_resistance",
+					"inverted": true
+				}
+			]
+		},
+		"entity_action": {
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition": {
+						"type": "origins:on_fire"
+					},
+					"action": {
+						"type": "origins:change_resource",
+						"resource": "evolved:frog/wet_skin_hydration",
+						"change": -20
+					}
+
+				},
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:moving"
+							},
+							{
+								"type": "origins:or",
+								"conditions": [
+									{
+										"type": "origins:exposed_to_sun"
+									},
+									{
+										"type": "origins:dimension",
+										"dimension": "minecraft:the_nether"
+									}
+								]
+							}
+						]
+					},
+					"action": {
+						"type": "origins:change_resource",
+						"resource": "evolved:frog/wet_skin_hydration",
+						"change": -2
+					}
+
+				},
+				{
+					"condition": {
+						"type": "origins:moving"
+					},
+					"action": {
+						"type": "origins:change_resource",
+						"resource": "evolved:frog/wet_skin_hydration",
+						"change": -1
+					}
+
+				}
+			]
+		}
+	},
+
+	"suffocate": {
+		"type": "origins:action_over_time",
+		"entity_action": {
+			"type": "origins:damage",
+			"amount": 1,
+			"source": {
+				"name": "dryout",
+				"bypasses_armor": true,
+				"unblockable": true
+			}
+		},
+		"interval": 20,
+		"condition": {
+			"type": "origins:resource",
+			"resource": "evolved:frog/wet_skin_hydration",
+			"comparison": "==",
+			"compare_to": 0
+		}
+	},
+
+	"respawn": {
+		"type": "origins:action_on_callback",
+		"entity_action_respawned": {
+			"type": "origins:change_resource",
+			"resource": "evolved:frog/wet_skin_hydration",
+			"change": 600
+		}
+
+	}
+
+
+}
