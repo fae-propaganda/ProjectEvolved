@@ -1,13 +1,17 @@
 {
 	"powers": [
-	"evolved:cavern_recluse/grapple",
-	"origins:climbing",
-	"origins:carnivore",
-	"origins:arthropod",
-	"origins:master_of_webs",
-	"evolved:cavern_recluse/strong_claws",
-	"evolved:cavern_recluse/hoarder"
+		"evolved:cavern_recluse/carnivorous",
+		
+		"origins:arthropod",
+		"origins:climbing",
+
+		"evolved:cavern_recluse/grapple",
+		
+		"origins:master_of_webs",
+		"evolved:cavern_recluse/strong_claws",
+		"evolved:cavern_recluse/hoarder"
 	],
+	
 	"icon": "minecraft:cobweb",
 	"order": 10,
 	"impact": 2,

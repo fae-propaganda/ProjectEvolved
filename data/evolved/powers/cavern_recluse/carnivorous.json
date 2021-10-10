@@ -1,0 +1,129 @@
+{
+    "name": "Carnivorous",
+    "description": "• Your diet is restricted to raw meats, raw fish, rotten flesh, and spider eyes.\n\n• You don't gain poison from eating spider eyes, nor do you gain hunger from eating rotten flesh or raw chicken.\n\n• You are still able to eat and gain the effects of special foods (chorus fruit, suspicious stew, honey bottles, and both types of golden apples), however they do not restore hunger or saturation.",
+    "type": "origins:multiple",
+    "restrict": {
+        "type": "origins:prevent_item_use",
+        "item_condition": {
+            "type": "origins:and",
+            "conditions": [
+                {
+                    "type": "origins:food"
+                },
+                {
+                    "type": "origins:or",
+                    "conditions": [
+                        {
+                            "type": "origins:ingredient",
+                            "ingredient": {
+                                "tag": "evolved:raw_meat"
+                            }
+                        },
+                        {
+                            "type": "origins:ingredient",
+                            "ingredient": {
+                                "tag": "evolved:ignore_diet"
+                            }
+                        }
+                    ],
+                    "inverted": true
+                }
+            ]
+        }
+    },
+    "modify_raw_meat": {
+        "type": "origins:modify_food",
+        "item_condition": {
+            "type": "origins:ingredient",
+            "ingredient": {
+                "tag": "evolved:raw_meat"
+            }
+        },
+        "food_modifiers": [
+            {
+                "operation": "addition",
+                "value": 1
+            },
+            {
+                "operation": "multiply_total",
+                "value": 2
+            }
+        ],
+        "saturation_modifiers": [
+            {
+                "operation": "addition",
+                "value": 1
+            },
+            {
+                "operation": "multiply_total",
+                "value": 3
+            }
+        ]
+    },
+    "modify_ignore_diet": {
+        "type": "origins:modify_food",
+        "item_condition": {
+            "type": "origins:ingredient",
+            "ingredient": {
+                "tag": "evolved:ignore_diet"
+            }
+        },
+        "food_modifier": {
+            "operation": "multiply_total",
+            "value": 0
+        },
+        "saturation_modifier": {
+            "operation": "multiply_total",
+            "value": 0
+        }
+    },
+    "prevent_poison": {
+        "type": "origins:action_on_item_use",
+        "entity_action": {
+            "type": "origins:clear_effect",
+            "effect": "minecraft:poison"
+        },
+        "item_condition": {
+            "type": "origins:ingredient",
+            "ingredient": {
+                "item": "minecraft:spider_eye"
+            }
+        },
+        "condition": {
+            "type": "origins:status_effect",
+            "effect": "minecraft:poison",
+            "max_amplifier": 0,
+            "max_duration": 80
+        }
+    },
+    "prevent_hunger": {
+        "type": "origins:action_on_item_use",
+        "entity_action": {
+            "type": "origins:clear_effect",
+            "effect": "minecraft:hunger"
+        },
+        "item_condition": {
+            "type": "origins:or",
+            "conditions": [
+                {
+                    "type": "origins:ingredient",
+                    "ingredient": {
+                        "item": "minecraft:rotten_flesh"
+                    }
+                },
+                {
+                    "type": "origins:ingredient",
+                    "ingredient": {
+                        "item": "minecraft:raw_chicken"
+                    }
+                }
+            ]
+        },
+        "condition": {
+            "type": "origins:status_effect",
+            "effect": "minecraft:hunger",
+            "max_amplifier": 0,
+            "max_duration": 600
+        }
+    }
+}
