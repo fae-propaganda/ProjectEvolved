@@ -77,25 +77,6 @@
             "value": 0
         }
     },
-    "prevent_poison": {
-        "type": "origins:action_on_item_use",
-        "entity_action": {
-            "type": "origins:clear_effect",
-            "effect": "minecraft:poison"
-        },
-        "item_condition": {
-            "type": "origins:ingredient",
-            "ingredient": {
-                "item": "minecraft:spider_eye"
-            }
-        },
-        "condition": {
-            "type": "origins:status_effect",
-            "effect": "minecraft:poison",
-            "max_amplifier": 0,
-            "max_duration": 80
-        }
-    },
     "prevent_hunger": {
         "type": "origins:action_on_item_use",
         "entity_action": {
