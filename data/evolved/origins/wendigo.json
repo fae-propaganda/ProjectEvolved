@@ -1,0 +1,10 @@
+{
+	"powers": [
+		"evolved:wendigo/hunt"
+	],
+	"icon": "minecraft:skeleton_skull",
+	"order": 10,
+	"impact": 1,
+	"name": "Wendigo",
+	"description": "Test"
+}

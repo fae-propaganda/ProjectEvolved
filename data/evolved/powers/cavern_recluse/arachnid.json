@@ -1,0 +1,36 @@
+{
+    "name": "Arachnid",
+    "description": "• You are of the arachnid entity type and are affected by Bane of Arthropods.\n\n• You can climb the sides of blocks.\n\n• You are immune to poison.\n\n• Cobwebs do not slow you down.",
+    "type": "origins:multiple",
+    "entity_group": {
+        "type": "origins:entity_group",
+        "group": "arthropod"
+    },
+    "climbing": {
+        "type": "origins:climbing",
+        "hold_condition": {
+            "type": "origins:or",
+                    "conditions": [
+                        {
+                            "type": "origins:block_collision",
+                            "offset_x": 0.01,
+                            "offset_z": 0.01,
+                            "offset_y": 0
+                        },
+                        {
+                            "type": "origins:block_collision",
+                            "offset_x": -0.01,
+                            "offset_z": -0.01,
+                            "offset_y": 0
+                        }
+                    ]
+        },
+        "condition": {
+            "type": "origins:collided_horizontally"
+        }
+    },
+    "poison_immunity": {
+        "type": "origins:effect_immunity",
+        "effect": "minecraft:poison"
+    }
+}

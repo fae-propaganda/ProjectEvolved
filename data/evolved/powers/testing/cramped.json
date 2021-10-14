@@ -1,0 +1,25 @@
+{
+    "type": "origins:stacking_status_effect",
+    "min_stacks": -2,
+    "max_stacks": 5,
+    "duration_per_stack": 400,
+    "tick_rate": 1,
+    "effects": [
+        {
+            "effect": "minecraft:speed",
+            "duration": 5000,
+            "amplifier": 1,
+            "ambient": true,
+            "show_particles": false,
+            "show_icon": true
+        },
+        {
+            "effect": "minecraft:strength",
+            "duration": 5000,
+            "amplifier": 0,
+            "ambient": true,
+            "show_particles": false,
+            "show_icon": true
+        }
+    ]
+}

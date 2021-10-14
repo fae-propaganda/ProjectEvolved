@@ -1,0 +1,13 @@
+{
+    "name": "Light Weight",
+    "description": "You take increased knockback.",
+    "type": "origins:multiple",
+
+    "knockback": {
+        "type": "origins:action_when_hit",
+        "bientity_action": {
+            "type": "origins:add_velocity",
+            "z": 0.5
+        }
+    }
+}

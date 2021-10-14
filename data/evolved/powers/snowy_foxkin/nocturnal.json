@@ -1,0 +1,21 @@
+{
+    "name": "Nocturnal",
+    "description": "You gain night vision in low light levels while out of water.",
+    "type": "origins:night_vision",
+    "strength": 0.5,
+    "condition": {
+        "type": "origins:and",
+        "conditions": [
+            {
+                "type": "origins:brightness",
+                "comparison": "<",
+                "compare_to": 0.5
+            },
+            {
+                "type": "origins:submerged_in",
+                "fluid": "minecraft:water",
+                "inverted": true
+            }
+        ]
+    }
+}

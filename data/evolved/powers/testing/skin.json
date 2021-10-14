@@ -1,0 +1,31 @@
+{
+    "type": "origins:multiple",
+    "name": "Void Skin",
+    "description": "Due to living in space, your skin has become dark and transparent.",
+    "default": {
+        "type": "origins:model_color",
+        "red": 0.25,
+        "green": 0.05,
+        "blue": 0.35,
+        "alpha": 0,
+        "condition": {
+            "type": "origins:resource",
+            "resource": "evolved:testing/potion_buffed",
+            "comparison": "==",
+            "compare_to": 0
+        }
+    },
+    "buffed": {
+        "type": "origins:model_color",
+        "red": 0.25,
+        "green": 0.05,
+        "blue": 0.35,
+        "alpha": 1,
+        "condition": {
+            "type": "origins:resource",
+            "resource": "evolved:testing/potion_buffed",
+            "comparison": "==",
+            "compare_to": 1
+        }
+    }
+}

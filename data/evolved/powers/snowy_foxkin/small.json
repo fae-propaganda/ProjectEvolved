@@ -1,0 +1,20 @@
+{
+    "name": "Small",
+    "description": "You are 1 and a quarter blocks tall. You can sneak under 1 block spaces.",
+    "type": "origins:action_on_callback",
+    "entity_action_chosen": {
+        "type": "origins:execute_command",
+        "command": "function evolved:origins/snowy_foxkin/small",
+        "permission_level": 4
+    },
+    "entity_action_respawned": {
+        "type": "origins:execute_command",
+        "command": "function evolved:origins/snowy_foxkin/small",
+        "permission_level": 4
+    },
+    "entity_action_lost": {
+        "type": "origins:execute_command",
+        "command": "scale reset",
+        "permission_level": 4
+    }
+}

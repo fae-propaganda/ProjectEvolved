@@ -1,16 +1,19 @@
 {
 	"powers": [
-		"evolved:snowy_foxkin/acrobatics",
-		"evolved:snowy_foxkin/fox_bite",
+		"evolved:snowy_foxkin/burrow",
 		"evolved:snowy_foxkin/fragile",
 		"evolved:snowy_foxkin/fresh_berries",
+
 		"evolved:snowy_foxkin/large_appetite",
-		"evolved:snowy_foxkin/light_body",
-		"evolved:snowy_foxkin/night_eyes",
-		"evolved:snowy_foxkin/pounce",
-		"evolved:snowy_foxkin/strong_ankles",
-		"evolved:snowy_foxkin/tiny_fox",
-		"evolved:snowy_foxkin/unwieldly"
+		"evolved:snowy_foxkin/light_weight",
+		"evolved:snowy_foxkin/nocturnal",
+		
+		"evolved:snowy_foxkin/pack_life",
+		"evolved:snowy_foxkin/predators",
+		"evolved:snowy_foxkin/small",
+		
+		"evolved:snowy_foxkin/unwieldly",
+		"evolved:snowy_foxkin/weak_arms"
 	],
 	"icon": "minecraft:sweet_berries",
 	"order": 10,

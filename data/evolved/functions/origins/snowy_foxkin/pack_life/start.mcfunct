@@ -1,0 +1,2 @@
+scoreboard players set #loop ev.temp 0
+function evolved:origins/snowy_foxkin/pack_life/loop

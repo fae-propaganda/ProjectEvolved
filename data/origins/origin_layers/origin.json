@@ -3,12 +3,11 @@
 
     "origins": [
         "origins:human",
-        "evolved:controls",
-        "evolved:snowy_foxkin",
         "evolved:cavern_recluse",
-        "evolved:griffin",
+        "evolved:wendigo",
+        "evolved:snowy_foxkin",
         "evolved:frog",
-        "evolved:rift_walker",
-        "evolved:saryn"
+        "evolved:saryn",
+        "evolved:testing"
     ]
 }

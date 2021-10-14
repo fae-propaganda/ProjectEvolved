@@ -1,0 +1,56 @@
+{
+    "name": "Predators",
+    "description": "Wild wolves and polar bears are aggressive towards you.",
+    "type": "origins:multiple",
+    "aggro": {
+        "type": "origins:action_over_time",
+        "entity_action": {
+            "type": "origins:execute_command",
+            "command": "function evolved:origins/snowy_foxkin/predators"
+        },
+        "interval": 20
+    },
+    "damage_dealt": {
+        "type": "origins:modify_damage_dealt",
+        "modifier": {
+            "operation": "multiply_total",
+            "value": -0.5
+        },
+        "target_condition": {
+            "type": "origins:or",
+            "conditions": [
+                {
+                    "type": "origins:entity_type",
+                    "entity_type": "minecraft:wolf"
+                },
+                {
+                    "type": "origins:entity_type",
+                    "entity_type": "minecraft:polar_bear"
+                }
+            ]
+        }
+    },
+    "damage_taken": {
+        "type": "origins:modify_damage_taken",
+        "modifier": {
+            "operation": "multiply_total",
+            "value": 0.5
+        },
+        "damage_condition": {
+            "type": "origins:attacker",
+            "entity_condition": {
+                "type": "origins:or",
+                "conditions": [
+                    {
+                        "type": "origins:entity_type",
+                        "entity_type": "minecraft:wolf"
+                    },
+                    {
+                        "type": "origins:entity_type",
+                        "entity_type": "minecraft:polar_bear"
+                    }
+                ]
+            }
+        }
+    }
+}

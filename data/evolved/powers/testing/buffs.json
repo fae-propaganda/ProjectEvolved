@@ -1,0 +1,148 @@
+{
+    "name": "From The Void",
+    "description": "You harness the power of the endless void of space; giving you large strength, speed and resistance boosts for a short period of time while draining your hunger and lowering your mining speed. However, after this short burst of power you feel weaker while you recharge.",
+    "type": "origins:multiple",
+    "active": {
+        "type": "origins:active_self",
+        "entity_action": {
+            "type": "origins:trigger_cooldown",
+            "power": "*:*_buff_time"
+        },
+        "cooldown": 200,
+        "hud_render": {
+            "should_render": true
+        }
+    },
+    "buff_time": {
+        "type": "origins:cooldown",
+        "cooldown": 120,
+        "hud_render": {
+            "should_render": true,
+            "bar_index": 3
+        }
+    },
+    "buffs": {
+        "type": "origins:action_over_time",
+        "entity_action": {
+            "type": "origins:apply_effect",
+            "effects": [
+                {
+                    "effect": "minecraft:strength",
+                    "duration": 5,
+                    "amplifier": 2,
+                    "is_ambient": true,
+                    "show_particles": false,
+                    "show_icon": false
+                },
+                {
+                    "effect": "minecraft:speed",
+                    "duration": 5,
+                    "amplifier": 2,
+                    "is_ambient": true,
+                    "show_particles": false,
+                    "show_icon": false
+                },
+                {
+                    "effect": "minecraft:resistance",
+                    "duration": 5,
+                    "amplifier": 2,
+                    "is_ambient": true,
+                    "show_particles": false,
+                    "show_icon": false
+                },
+                {
+                    "effect": "minecraft:mining_fatigue",
+                    "duration": 5,
+                    "amplifier": 1,
+                    "is_ambient": true,
+                    "show_particles": false,
+                    "show_icon": false
+                },
+                {
+                    "effect": "minecraft:hunger",
+                    "duration": 5,
+                    "amplifier": 1,
+                    "is_ambient": true,
+                    "show_particles": false,
+                    "show_icon": false
+                }
+            ]
+        },
+        "falling_action": {
+            "type": "origins:trigger_cooldown",
+            "power": "*:*_debuff_time"
+        },
+        "interval": 4,
+        "condition": {
+            "type": "origins:resource",
+            "resource": "*:*_buff_time",
+            "comparison": ">",
+            "compare_to": 0
+        }
+    },
+    "debuff_time": {
+        "type": "origins:cooldown",
+        "cooldown": 40,
+        "hud_render": {
+            "should_render": true,
+            "bar_index": 2
+        }
+    },
+    "debuffs": {
+        "type": "origins:action_over_time",
+        "entity_action": {
+            "type": "origins:apply_effect",
+            "effects": [
+                {
+                    "effect": "minecraft:slowness",
+                    "duration": 5,
+                    "amplifier": 0,
+                    "is_ambient": true,
+                    "show_particles": false,
+                    "show_icon": false
+                },
+                {
+                    "effect": "minecraft:weakness",
+                    "duration": 5,
+                    "amplifier": 0,
+                    "is_ambient": true,
+                    "show_particles": false,
+                    "show_icon": false
+                }
+            ]
+        },
+        "interval": 4,
+        "condition": {
+            "type": "origins:resource",
+            "resource": "*:*_debuff_time",
+            "comparison": ">",
+            "compare_to": 0
+        }
+    },
+    "translucent": {
+        "type": "origins:model_color",
+        "red": 0.25,
+        "green": 0.05,
+        "blue": 0.35,
+        "alpha": 0.4,
+        "condition": {
+            "type": "origins:resource",
+            "resource": "*:*_buff_time",
+            "comparison": "==",
+            "compare_to": 0
+        }
+    },
+    "solid": {
+        "type": "origins:model_color",
+        "red": 0.25,
+        "green": 0.05,
+        "blue": 0.35,
+        "alpha": 1,
+        "condition": {
+            "type": "origins:resource",
+            "resource": "*:*_buff_time",
+            "comparison": ">",
+            "compare_to": 0
+        }
+    }
+}

@@ -1,0 +1,25 @@
+{
+    "name": "Pack Life",
+    "description": "You and allied players gain a 15% movement speed bonus while there is at least 1 other player nearby",
+    "type": "origins:action_over_time",
+    "entity_action": {
+        "type": "origins:and",
+        "actions": [
+            {
+                "type": "origins:execute_command",
+                "command": "effect give @a[distance=..8] speed 1 0 true"
+            },
+            {
+                "type": "origins:execute_command",
+                "command": "function evolved:origins/snowy_foxkin/pack_life/start"
+            }
+        ]
+    },
+    "interval": 1,
+    "condition": {
+        "type": "origins:command",
+        "command": "execute if entity @a[distance=0.1..8]",
+        "comparison": "==",
+        "compare_to": 1
+    }
+}

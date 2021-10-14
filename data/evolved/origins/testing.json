@@ -1,0 +1,10 @@
+{
+	"powers": [
+	"evolved:testing/buffs"
+	],
+	"icon": "minecraft:anvil",
+	"order": 10,
+	"impact": 0,
+	"name": "Testing",
+	"description": "Empty description"
+}

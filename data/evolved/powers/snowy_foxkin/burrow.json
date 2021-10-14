@@ -1,0 +1,89 @@
+{
+    "name": "Burrow",
+    "description": "You move twice as fast while crawling under 1 block spaces. Holding shift increases your movement close to sprinting speed.",
+    "type": "origins:multiple",
+    "sneak": {
+        "type": "origins:action_over_time",
+        "rising_action": {
+            "type": "origins:execute_command",
+            "command": "scale set pehkui:motion 4.3"
+        },
+        "interval": 1,
+        "condition": {
+            "type": "origins:and",
+            "conditions": [
+                {
+                    "type": "origins:block_collision",
+                    "offset_x": 0,
+                    "offset_y": 0.1,
+                    "offset_z": 0
+                },
+                {
+                    "type": "origins:block_collision",
+                    "offset_x": 0,
+                    "offset_y": -0.1,
+                    "offset_z": 0
+                },
+                {
+                    "type": "origins:sneaking"
+                }
+            ]
+        }
+    },
+    "walk": {
+        "type": "origins:action_over_time",
+        "rising_action": {
+            "type": "origins:execute_command",
+            "command": "scale set pehkui:motion 2"
+        },
+        "interval": 1,
+        "condition": {
+            "type": "origins:and",
+            "conditions": [
+                {
+                    "type": "origins:block_collision",
+                    "offset_x": 0,
+                    "offset_y": 0.1,
+                    "offset_z": 0
+                },
+                {
+                    "type": "origins:block_collision",
+                    "offset_x": 0,
+                    "offset_y": -0.1,
+                    "offset_z": 0
+                },
+                {
+                    "type": "origins:sneaking",
+                    "inverted": true
+                }
+            ]
+        }
+    },
+    "exit": {
+        "type": "origins:action_over_time",
+        "rising_action": {
+            "type": "origins:execute_command",
+            "command": "scale set pehkui:motion 1"
+        },
+        "interval": 1,
+        "condition": {
+            "type": "origins:and",
+            "inverted": true,
+            "conditions": [
+                {
+                    "type": "origins:block_collision",
+                    "offset_x": 0,
+                    "offset_y": 0.1,
+                    "offset_z": 0
+                },
+                {
+                    "type": "origins:block_collision",
+                    "offset_x": 0,
+                    "offset_y": -0.1,
+                    "offset_z": 0
+                }
+            ]
+        }
+    }
+    
+}

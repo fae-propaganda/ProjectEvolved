@@ -1,0 +1,43 @@
+{
+    "name": "Hunt",
+    "description": "N/A",
+    "type": "origins:multiple",
+    "active": {
+        "type": "origins:active_self",
+        "entity_action": {
+            "type": "origins:if_else",
+            "condition": {
+                "type": "origins:on_fire"
+            },
+            "if_action": {
+                "type": "origins:extinguish"
+            },
+            "else_action": {
+                "type": "origins:set_on_fire",
+                "duration": 8
+            }
+        },
+        "cooldown": 20,
+        "hud_render": {
+            "should_render": false
+        }
+    },
+    "passive": {
+        "type": "origins:entity_glow",
+        "use_teams": false,
+        "red": 1.0,
+        "green": 0.0,
+        "blue": 0.0,
+        "entity_condition": {
+            "type": "origins:command",
+            "command": "function evolved:origins/wendigo/test",
+            "comparison": "==",
+            "compare_to": 2
+        },
+        "bientity_condition": {
+            "type": "origins:distance",
+            "comparison": "<=",
+            "compare_to": 30
+        }
+    }
+}

@@ -1,9 +1,8 @@
 {
 	"powers": [
 		"evolved:cavern_recluse/carnivorous",
-		
-		"origins:arthropod",
-		"origins:climbing",
+		"evolved:cavern_recluse/arachnid",
+		"origins:no_cobweb_slowdown",
 
 		"evolved:cavern_recluse/grapple",
 		
