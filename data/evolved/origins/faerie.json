@@ -2,7 +2,8 @@
 	"powers": [
 
 	],
-	"icon": "minecraft:air",
+
+	"icon": "minecraft:blue_orchid",
 	"order": 10,
 	"impact": 0,
 	"name": "Faerie",

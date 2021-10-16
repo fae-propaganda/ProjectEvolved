@@ -1,0 +1,41 @@
+{
+    "name": "Size Shift",
+    "description": "Change sizes",
+    "type": "origins:multiple",
+    "active": {
+        "type": "origins:active_self",
+        "entity_action": {
+            "type": "origins:if_else",
+            "condition": {
+                "type": "origins:on_fire"
+            },
+            "if_action": {
+                "type": "origins:extinguish"
+            },
+            "else_action": {
+                "type": "origins:set_on_fire",
+                "duration": 8
+            }
+        },
+        "cooldown": 40,
+        "hud_render": {
+            "should_render": true
+        }
+    },
+    "is_small": {
+        "type": "origins:resource",
+        "min": 0,
+        "max": 1,
+        "hud_render": {
+            "should_render": false
+        },
+        "min_action": {
+            "type": "origins:execute_command",
+            "command": "say big"
+        },
+        "max_action": {
+            "type": "origins:execute_command",
+            "command": "say small"
+        }
+    }
+}
