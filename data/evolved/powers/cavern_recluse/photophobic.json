@@ -1,0 +1,32 @@
+{
+    "name": "photophobic",
+    "description": "you dont like staying under the sun .",
+    "type": "origins:stacking_status_effect",
+    "min_stacks": -2,
+    "max_stacks": 5,
+    "duration_per_stack": 20,
+    "tick_rate": 20,
+    " effects": [
+        {
+            "effect": "minecraft:weakness",
+            "is_ambient": true,
+            "show_particles": false,
+            "show_icon": true
+        },
+        {
+            "effect": "minecraft:slowness",
+            "is_ambient": true,
+            "show_particles": false,
+            "show_icon": true
+        },
+        {
+            "effect": "minecraft:mining_fatigue",
+            "is_ambient": true,
+            "show_particles": true,
+            "show_icon": true
+        }
+    ],
+    "condition": {
+        "type": "origins:exposed_to_sun"
+    }
+}

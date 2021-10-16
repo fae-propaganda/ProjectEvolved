@@ -8,7 +8,8 @@
 		
 		"origins:master_of_webs",
 		"evolved:cavern_recluse/strong_claws",
-		"evolved:cavern_recluse/hoarder"
+		"evolved:cavern_recluse/hoarder",
+		"evolved:cavern_recluse/photophobic"
 	],
 	
 	"icon": "minecraft:cobweb",
