@@ -1,0 +1,94 @@
+{
+    "name": "Flight",
+    "description": "Hold SPACE while in air to float",
+    "type": "origins:multiple",
+    "is_flying": {
+        "type": "origins:resource",
+        "min": 0,
+        "max": 1,
+        "hud_render": {
+            "should_render": true
+        },
+        "min_action": {
+            "type": "origins:execute_command",
+            "command": "say is flying"
+        },
+        "max_action": {
+            "type": "origins:execute_command",
+            "command": "say is not flying"
+        }
+    },
+    "input_timeout": {
+        "type": "origins:cooldown",
+        "cooldown": 8,
+        "hud_render": {
+            "should_render": true,
+            "bar_index": 3
+        }
+    },
+    "check_fly": {
+        "type": "origins:active_self",
+        "cooldown": 1,
+        "hud_render": {
+            "should_render": true
+        },
+        "key": {
+            "key": "key.jump",
+            "continuous": false
+        },
+        "entity_action": {
+            "type": "origins:if_else",
+            "condition": {
+                "type": "origins:resource",
+                "resource": "*:*_input_timeout",
+                "comparison": ">",
+                "compare_to": 0
+            },
+            "if_action": {
+                "type": "origins:and",
+                "actions": [
+                    {
+                        "type": "origins:if_else",
+                        "condition": {
+                            "type": "origins:resource",
+                            "resource": "*:*_is_flying",
+                            "comparison": "==",
+                            "compare_to": 0
+                        },
+                        "if_action": {
+                            "type": "origins:change_resource",
+                            "resource": "*:*_is_flying",
+                            "change": 1
+                        },
+                        "else_action": {
+                            "type": "origins:change_resource",
+                            "resource": "*:*_is_flying",
+                            "change": -1
+                        }
+                    },
+                    {
+                        "type": "origins:change_resource",
+                        "resource": "*:*_input_timeout",
+                        "change": 8,
+                        "operation": "set"
+                    }
+                ]
+            },
+            "else_action": {
+                "type": "origins:trigger_cooldown",
+                "power": "*:*_input_timeout"
+            }
+        }
+    },
+    "prevent_fall": {
+        "type": "origins:modify_falling",
+        "velocity": 0.0,
+        "take_fall_damage": false,
+        "condition": {
+            "type": "origins:resource",
+                "resource": "*:*_is_flying",
+                "comparison": "==",
+                "compare_to": 1
+        }
+    }
+}

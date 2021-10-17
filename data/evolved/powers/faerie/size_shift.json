@@ -7,14 +7,20 @@
         "entity_action": {
             "type": "origins:if_else",
             "condition": {
-                "type": "origins:on_fire"
+                "type": "origins:resource",
+                "resource": "*:*_is_small",
+                "comparison": "==",
+                "compare_to": 0
             },
             "if_action": {
-                "type": "origins:extinguish"
+                "type": "origins:change_resource",
+                "resource": "*:*_is_small",
+                "change": 1
             },
             "else_action": {
-                "type": "origins:set_on_fire",
-                "duration": 8
+                "type": "origins:change_resource",
+                "resource": "*:*_is_small",
+                "change": -1
             }
         },
         "cooldown": 40,
@@ -31,11 +37,11 @@
         },
         "min_action": {
             "type": "origins:execute_command",
-            "command": "say big"
+            "command": "scale set pehkui:base 1"
         },
         "max_action": {
             "type": "origins:execute_command",
-            "command": "say small"
+            "command": "scale set pehkui:base 0.25"
         }
     }
 }
