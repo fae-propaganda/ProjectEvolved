@@ -7,22 +7,22 @@
         "min": 0,
         "max": 1,
         "hud_render": {
-            "should_render": true
+            "should_render": false
         },
         "min_action": {
             "type": "origins:execute_command",
-            "command": "say is flying"
+            "command": "me is not flying"
         },
         "max_action": {
             "type": "origins:execute_command",
-            "command": "say is not flying"
+            "command": "me is flying"
         }
     },
     "input_timeout": {
         "type": "origins:cooldown",
-        "cooldown": 8,
+        "cooldown": 6,
         "hud_render": {
-            "should_render": true,
+            "should_render": false,
             "bar_index": 3
         }
     },
@@ -30,7 +30,7 @@
         "type": "origins:active_self",
         "cooldown": 1,
         "hud_render": {
-            "should_render": true
+            "should_render": false
         },
         "key": {
             "key": "key.jump",
@@ -69,7 +69,7 @@
                     {
                         "type": "origins:change_resource",
                         "resource": "*:*_input_timeout",
-                        "change": 8,
+                        "change": 6,
                         "operation": "set"
                     }
                 ]
@@ -80,15 +80,207 @@
             }
         }
     },
-    "prevent_fall": {
-        "type": "origins:modify_falling",
-        "velocity": 0.0,
-        "take_fall_damage": false,
+    "flight_energy": {
+        "type": "origins:resource",
+        "min": 0,
+        "max": 200,
+        "start_value": 200,
+        "hud_render": {
+            "should_render": true,
+            "bar_index": 7
+        }
+    },
+    "is_holding_jump": {
+        "type": "origins:cooldown",
+        "cooldown": 3,
+        "hud_render": {
+            "should_render": false,
+            "bar_index": 5
+        }
+    },
+    "is_holding_sneak": {
+        "type": "origins:cooldown",
+        "cooldown": 3,
+        "hud_render": {
+            "should_render": false,
+            "bar_index": 6
+        }
+    },
+    "detect_jump": {
+        "type": "origins:active_self",
+        "hud_render": {
+            "should_render": false
+        },
+        "key": {
+            "key": "key.jump",
+            "continuous": true
+        },
+        "entity_action": {
+            "type": "origins:trigger_cooldown",
+            "power": "*:*_is_holding_jump"
+        },
+        "cooldown": 1
+    },
+    "detect_sneak": {
+        "type": "origins:active_self",
+        "hud_render": {
+            "should_render": false
+        },
+        "key": {
+            "key": "key.sneak",
+            "continuous": true
+        },
+        "entity_action": {
+            "type": "origins:trigger_cooldown",
+            "power": "*:*_is_holding_sneak"
+        },
+        "cooldown": 1
+    },
+    "apply_flying_effects": {
+        "type": "origins:action_over_time",
         "condition": {
             "type": "origins:resource",
-                "resource": "*:*_is_flying",
-                "comparison": "==",
-                "compare_to": 1
+            "resource": "*:*_is_flying",
+            "comparison": "==",
+            "compare_to": 1
+        },
+        "entity_action": {
+            "type": "origins:if_else_list",
+            "actions": [
+                {
+                    "condition": {
+                        "type": "origins:and",
+                        "conditions": [
+                            {
+                                "type": "origins:resource",
+                                "resource": "*:*_is_holding_jump",
+                                "comparison": ">",
+                                "compare_to": 0
+                            },
+                            {
+                                "type": "origins:resource",
+                                "resource": "*:*_is_holding_sneak",
+                                "comparison": "==",
+                                "compare_to": 0
+                            }
+                        ]
+                    },
+                    "action": {
+                        "type": "origins:apply_effect",
+                        "effect": {
+                            "effect": "minecraft:levitation",
+                            "duration": 2,
+                            "amplifier": 5,
+                            "is_ambient": true,
+                            "show_particles": false,
+                            "show_icon": false
+                        }
+                    }
+                },
+                {
+                    "condition": {
+                        "type": "origins:and",
+                        "conditions": [
+                            {
+                                "type": "origins:resource",
+                                "resource": "*:*_is_holding_sneak",
+                                "comparison": ">",
+                                "compare_to": 0
+                            },
+                            {
+                                "type": "origins:resource",
+                                "resource": "*:*_is_holding_jump",
+                                "comparison": "==",
+                                "compare_to": 0
+                            }
+                        ]
+                    },
+                    "action": {
+                        "type": "origins:apply_effect",
+                        "effect": {
+                            "effect": "minecraft:levitation",
+                            "duration": 2,
+                            "amplifier": -7,
+                            "is_ambient": true,
+                            "show_particles": false,
+                            "show_icon": false
+                        }
+                    }
+                },
+                {
+                    "condition": {
+                        "type": "origins:constant",
+                        "value": true
+                    },
+                    "action": {
+                        "type": "origins:apply_effect",
+                        "effect": {
+                            "effect": "minecraft:levitation",
+                            "duration": 2,
+                            "amplifier": -1,
+                            "is_ambient": true,
+                            "show_particles": false,
+                            "show_icon": false
+                        }
+                    }
+                }
+            ]
+        },
+        "interval": 1
+    },
+    "land": {
+        "type": "origins:action_over_time",
+        "rising_action": {
+            "type": "origins:change_resource",
+            "resource": "*:*_is_flying",
+            "change": -1
+        },
+        "interval": 1,
+        "condition": {
+            "type": "origins:and",
+            "conditions": [
+                {
+                    "type": "origins:sneaking"
+                },
+                {
+                    "type": "origins:block_collision",
+                    "offset_x": 0,
+                    "offset_y": -0.1,
+                    "offset_z": 0
+                }
+            ]
+        }
+    },
+    "glide": {
+        "type": "origins:action_over_time",
+        "interval": 1,
+        "condition": {
+            "type": "origins:and",
+            "conditions": [
+                {
+                    "type": "origins:resource",
+                    "resource": "*:*_is_flying",
+                    "comparison": "==",
+                    "compare_to": 0
+                },
+                {
+                    "type": "origins:resource",
+                    "resource": "*:*_is_holding_jump",
+                    "comparison": ">",
+                    "compare_to": 0
+                }
+            ]
+        },
+        "entity_action": {
+            "type": "origins:apply_effect",
+            "effect": {
+                "effect": "minecraft:slow_falling",
+                "duration": 2,
+                "amplifier": -3,
+                "is_ambient": true,
+                "show_particles": false,
+                "show_icon": false
+            }
         }
     }
 }
