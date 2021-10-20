@@ -1,0 +1,60 @@
+{
+    "name": "Saprophyte",
+    "description": "You are unable to eat food. You restore hunger from standing on grass blocks, dirt, coarse dirt, podzol, farmland, nylium, mycelium, and soul soil.",
+    "type": "origins:multiple",
+    "prevent_eating_food": {
+        "type": "origins:prevent_item_use",
+        "item_condition": {
+            "type": "origins:food"
+        }
+    },
+    "metabolize": {
+        "type": "origins:action_over_time",
+        "entity_action": {
+            "type": "origins:if_else",
+            "condition": {
+                "type": "origins:food_level",
+                "comparison": "==",
+                "compare_to": 20
+            },
+            "if_action": {
+                "type": "origins:feed",
+                "food": 1,
+                "saturation": 0.5
+            },
+            "else_action": {
+                "type": "origins:feed",
+                "food": 1,
+                "saturation": 0
+            }
+        },
+        "interval": 20,
+        "condition": {
+            "type": "origins:and",
+            "conditions": [
+                {
+                    "type": "origins:on_block",
+                    "block_condition": {
+                        "type": "origins:in_tag",
+                        "tag": "evolved:fungi_soil"
+                    }
+                },
+                {
+                    "type": "origins:block_in_radius",
+                    "block_condition": {
+                        "type": "origins:in_tag",
+                        "tag": "evolved:fungi_soil"
+                    },
+                    "radius": 2,
+                    "shape": "cube",
+                    "comparison": ">=",
+                    "compare_to": 25
+                },
+                {
+                    "type": "origins:moving",
+                    "inverted": true
+                }
+            ]
+        }
+    }
+}

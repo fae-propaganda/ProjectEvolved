@@ -1,0 +1,11 @@
+{
+	"powers": [
+	"evolved:warped_myconid/saprophyte",
+    "evolved:warped_myconid/bouyant"
+	],
+	"icon": "minecraft:warped_fungus",
+	"order": 10,
+	"impact": 0,
+	"name": "Warped Myconid",
+	"description": "Empty description"
+}
