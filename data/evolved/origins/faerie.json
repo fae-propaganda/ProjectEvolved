@@ -2,6 +2,7 @@
 	"powers": [
 		"evolved:faerie/size_shift",
 		"evolved:faerie/flight",
+		"evolved:faerie/ride"
 	],
 
 	"icon": "minecraft:blue_orchid",

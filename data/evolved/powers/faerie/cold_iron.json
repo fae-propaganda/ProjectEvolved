@@ -1,0 +1,74 @@
+{
+    "name": "Cold Iron",
+    "description": "You can't wear iron armor, nor use iron tools.",
+    "type": "origins:multiple",
+    "restrict_armor": {
+        "type": "origins:restrict_armor",
+        "head": {
+            "type": "origins:ingredient",
+            "ingredient": {
+                "tag": "evolved:iron_equipment"
+            }
+        },
+        "chest": {
+            "type": "origins:ingredient",
+            "ingredient": {
+                "tag": "evolved:iron_equipment"
+            }
+        },
+        "legs": {
+            "type": "origins:ingredient",
+            "ingredient": {
+                "tag": "evolved:iron_equipment"
+            }
+        },
+        "feet": {
+            "type": "origins:ingredient",
+            "ingredient": {
+                "tag": "evolved:iron_equipment"
+            }
+        },
+        "restrict_tools": {
+            "type": "origins:attribute",
+            "modifiers": [
+                {
+                    "name": "Extra Reach block reach",
+                    "attribute": "reach-entity-attributes:reach",
+                    "value": -1,
+                    "operation": "multiply_total"
+                },
+                {
+                    "name": "Extra Reach entity reach",
+                    "attribute": "reach-entity-attributes:attack_range",
+                    "value": -1,
+                    "operation": "multiply_total"
+                }
+            ],
+            "condition": {
+                "type": "origins:or",
+                "conditions": [
+                    {
+                        "type": "origins:equipped_item",
+                        "equipment_slot": "mainhand",
+                        "item_condition": {
+                            "type": "origins:ingredient",
+                            "ingredient": {
+                                "tag": "evolved:iron_equipment"
+                            }
+                        }
+                    },
+                    {
+                        "type": "origins:equipped_item",
+                        "equipment_slot": "offhand",
+                        "item_condition": {
+                            "type": "origins:ingredient",
+                            "ingredient": {
+                                "tag": "evolved:iron_equipment"
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}
