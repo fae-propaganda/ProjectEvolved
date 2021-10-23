@@ -1,8 +1,13 @@
 {
 	"powers": [
-		"evolved:cavern_recluse/carnivorous",
 		"evolved:cavern_recluse/arachnid",
 		"origins:no_cobweb_slowdown",
+		"evolved:cavern_recluse/cave_dweller",
+		"evolved:cavern_recluse/carnivorous",
+		
+		
+		
+		"evolved:cavern_recluse/water_repelling_hairs",
 
 		"evolved:cavern_recluse/grapple",
 		

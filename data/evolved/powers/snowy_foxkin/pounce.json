@@ -1,0 +1,376 @@
+{
+    "name": "Pounce",
+    "description": "Crouching charges up your jump",
+    "type": "origins:multiple",
+    "timeout_cooldown": {
+        "type": "origins:cooldown",
+        "cooldown": 10,
+        "hud_render": {
+            "should_render": false
+        }
+    },
+    "charge_resource": {
+        "type": "origins:resource",
+        "min": 0,
+        "max": 20,
+        "hud_render": {
+            "should_render": true,
+            "bar_index": 6,
+            "condition": {
+                "type": "origins:resource",
+                "resource": "*:*_charge_resource",
+                "comparison": ">",
+                "compare_to": 0
+            }
+        }
+    },
+    "pounce_cooldown": {
+        "type": "origins:cooldown",
+        "cooldown": 80,
+        "hud_render": {
+            "should_render": true,
+            "bar_index": 4,
+            "condition": {
+                "type": "origins:resource",
+                "resource": "*:*_pounce_cooldown",
+                "comparison": ">",
+                "compare_to": 0
+            }
+        }
+    },
+    "timeout_reset": {
+        "type": "origins:action_over_time",
+        "interval": 1,
+        "rising_action": {
+            "type": "origins:change_resource",
+            "resource": "*:*_charge_resource",
+            "change": 0,
+            "operation": "set"
+        },
+        "condition": {
+            "type": "origins:resource",
+            "resource": "*:*_timeout_cooldown",
+            "comparison": "==",
+            "compare_to": 0
+        }
+    },
+    "burrow_reset": {
+        "type": "origins:action_over_time",
+        "interval": 1,
+        "rising_action": {
+            "type": "origins:change_resource",
+            "resource": "*:*_charge_resource",
+            "change": 0,
+            "operation": "set"
+        },
+        "condition": {
+            "type": "origins:and",
+            "conditions": [
+                {
+                    "type": "origins:block_collision",
+                    "offset_x": 0,
+                    "offset_y": 0.1,
+                    "offset_z": 0
+                },
+                {
+                    "type": "origins:block_collision",
+                    "offset_x": 0,
+                    "offset_y": -0.1,
+                    "offset_z": 0
+                }
+            ]
+        }
+    },
+    "charge": {
+        "type": "origins:action_over_time",
+        "rising_action": {
+            "type": "origins:and",
+            "actions": [
+                {
+                    "type": "origins:change_resource",
+                    "resource": "*:*_charge_resource",
+                    "change": 0,
+                    "operation": "set"
+                },
+                {
+                    "type": "origins:change_resource",
+                    "resource": "*:*_timeout_cooldown",
+                    "change": 100,
+                    "operation": "set"
+                }
+            ]
+        },
+        "entity_action": {
+            "type": "origins:change_resource",
+            "resource": "*:*_charge_resource",
+            "change": 1
+        },
+        "falling_action": {
+            "type": "origins:trigger_cooldown",
+            "power": "*:*_timeout_cooldown"
+        },
+        "interval": 1,
+        "condition": {
+            "type": "origins:and",
+            "conditions": [
+                {
+                    "type": "origins:on_block"
+                },
+                {
+                    "type": "origins:sneaking"
+                },
+                {
+                    "type": "origins:resource",
+                    "resource": "*:*_pounce_cooldown",
+                    "comparison": "==",
+                    "compare_to": 0
+                },
+                {
+                    "type": "origins:and",
+                    "inverted": true,
+                    "conditions": [
+                        {
+                            "type": "origins:block_collision",
+                            "offset_x": 0,
+                            "offset_y": 0.1,
+                            "offset_z": 0
+                        },
+                        {
+                            "type": "origins:block_collision",
+                            "offset_x": 0,
+                            "offset_y": -0.1,
+                            "offset_z": 0
+                        }
+                    ]
+                },
+                {
+                    "type": "origins:fluid_height",
+                    "fluid": "minecraft:water",
+                    "comparison": "==",
+                    "compare_to": 0
+                },
+                {
+                    "type": "origins:fluid_height",
+                    "fluid": "minecraft:lava",
+                    "comparison": "==",
+                    "compare_to": 0
+                }
+            ]
+        }
+    },
+    "half_pounce": {
+        "type": "origins:modify_jump",
+        "modifier": {
+            "operation": "addition",
+            "value": 0.29
+        },
+        "condition": {
+            "type": "origins:and",
+            "conditions": [
+                {
+                    "type": "origins:resource",
+                    "resource": "*:*_charge_resource",
+                    "comparison": ">=",
+                    "compare_to": 10
+                },
+                {
+                    "type": "origins:resource",
+                    "resource": "*:*_charge_resource",
+                    "comparison": "<",
+                    "compare_to": 20
+                }
+            ]
+        },
+        "entity_action": {
+            "type": "origins:and",
+            "actions": [
+                {
+                    "type": "origins:change_resource",
+                    "resource": "*:*_charge_resource",
+                    "change": 0,
+                    "operation": "set"
+                },
+                {
+                    "type": "origins:change_resource",
+                    "resource": "*:*_is_rising",
+                    "change": 1,
+                    "operation": "set"
+                }
+            ]
+        }
+    },
+    "full_pounce": {
+        "type": "origins:modify_jump",
+        "modifier": {
+            "operation": "addition",
+            "value": 0.51
+        },
+        "condition": {
+            "type": "origins:resource",
+            "resource": "*:*_charge_resource",
+            "comparison": "==",
+            "compare_to": 20
+        },
+        "entity_action": {
+            "type": "origins:and",
+            "actions": [
+                {
+                    "type": "origins:change_resource",
+                    "resource": "*:*_charge_resource",
+                    "change": 0,
+                    "operation": "set"
+                },
+                {
+                    "type": "origins:change_resource",
+                    "resource": "*:*_is_rising",
+                    "change": 1,
+                    "operation": "set"
+                }
+            ]
+        }
+    },
+    "is_rising": {
+        "type": "origins:resource",
+        "min": 0,
+        "max": 1,
+        "hud_render": {
+            "should_render": false,
+            "bar_index": 2
+        },
+        "max_action": {
+            "type": "origins:change_resource",
+            "resource": "*:*_is_active",
+            "change": 1,
+            "operation": "set"
+        }
+    },
+    "is_falling": {
+        "type": "origins:resource",
+        "min": 0,
+        "max": 1,
+        "hud_render": {
+            "should_render": false,
+            "bar_index": 3
+        },
+        "min_action": {
+            "type": "origins:change_resource",
+            "resource": "*:*_is_active",
+            "change": 0,
+            "operation": "set"
+        }
+    },
+    "is_active": {
+        "type": "origins:resource",
+        "min": 0,
+        "max": 1,
+        "hud_render": {
+            "should_render": true,
+            "bar_index": 3,
+            "condition": {
+                "type": "origins:resource",
+                "resource": "*:*_is_active",
+                "comparison": "==",
+                "compare_to": 1
+            }
+        }
+    },
+    "update_falling": {
+        "type": "origins:action_over_time",
+        "interval": 1,
+        "entity_action": {
+            "type": "origins:if_else_list",
+            "actions": [
+                {
+                    "condition": {
+                        "type": "origins:and",
+                        "conditions": [
+                            {
+                                "type": "origins:resource",
+                                "resource": "*:*_is_rising",
+                                "comparison": "==",
+                                "compare_to": 1
+                            },
+                            {
+                                "type": "origins:predicate",
+                                "predicate": "evolved:is_falling"
+                            }
+                        ]
+                    },
+                    "action": {
+                        "type": "origins:and",
+                        "actions": [
+                            {
+                                "type": "origins:change_resource",
+                                "resource": "*:*_is_rising",
+                                "change": 0,
+                                "operation": "set"
+                            },
+                            {
+                                "type": "origins:change_resource",
+                                "resource": "*:*_is_falling",
+                                "change": 1,
+                                "operation": "set"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "condition": {
+                        "type": "origins:and",
+                        "conditions": [
+                            {
+                                "type": "origins:resource",
+                                "resource": "*:*_is_falling",
+                                "comparison": "==",
+                                "compare_to": 1
+                            },
+                            {
+                                "type": "origins:predicate",
+                                "predicate": "evolved:is_falling",
+                                "inverted": true
+                            }
+                        ]
+                    },
+                    "action": {
+                        "type": "origins:and",
+                        "actions": [
+                            {
+                                "type": "origins:change_resource",
+                                "resource": "*:*_is_falling",
+                                "change": 0,
+                                "operation": "set"
+                            },
+                            {
+                                "type": "origins:trigger_cooldown",
+                                "power": "*:*_pounce_cooldown"
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    },
+    "damage_bonus": {
+        "type": "origins:modify_damage_dealt",
+        "condition": {
+            "type": "origins:resource",
+            "resource": "*:*_is_falling",
+            "comparison": "==",
+            "compare_to": 1
+        },
+        "modifier": {
+            "name": "Double damage on pounce crit",
+            "operation": "multiply_total",
+            "value": 1.0
+        },
+        "self_action": {
+            "type": "origins:play_sound",
+            "sound": "minecraft:entity.fox.bite",
+            "volume": 5
+        },
+        "target_action": {
+            "type": "origins:execute_command",
+            "command": "execute anchored eyes positioned ^ ^ ^ run particle minecraft:instant_effect ~ ~ ~ 0.5 0.5 0.5 0 10"
+        }
+    }
+}

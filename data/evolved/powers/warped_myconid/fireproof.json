@@ -1,0 +1,59 @@
+{
+    "name": "Fireproof",
+    "description": "You are immune to fire damage.",
+    "type": "origins:multiple",
+    "fire_immunity": {
+        "type": "origins:fire_immunity",
+        "hidden": true
+    },
+    "lava_timer": {
+        "type": "origins:resource",
+        "min": 0,
+        "max": 400,
+        "hud_render": {
+            "should_render": true,
+            "bar_index": 7,
+            "condition": {
+                "type": "origins:resource",
+                "resource": "*:*_lava_timer",
+                "comparison": ">",
+                "compare_to": 0
+            },
+            "inverted": true
+        }
+    },
+    "lava_breathing": {
+        "type": "origins:action_over_time",
+        "entity_action": {
+            "type": "origins:if_else",
+            "condition": {
+                "type": "origins:fluid_height",
+                "fluid": "minecraft:lava",
+                "comparison": ">",
+                "compare_to": 0
+            },
+            "if_action": {
+                "type": "origins:change_resource",
+                "resource": "*:*_lava_timer",
+                "change": 1
+            },
+            "else_action": {
+                "type": "origins:change_resource",
+                "resource": "*:*_lava_timer",
+                "change": -1
+            }
+        },
+        "interval": 1
+    },
+    "lava_damage": {
+        "type": "origins:action_over_time",
+        "entity_action": {
+            "type": "origins:set_on_fire",
+            "duration": 4
+        },
+        "interval": 20,
+        "condition": {
+            "type": "origins:on_fire"
+        }
+    }
+}

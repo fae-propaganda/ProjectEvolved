@@ -1,0 +1,38 @@
+{
+    "name": "Water Repelling Hairs",
+    "description": "When entering water with full air, you gain a minute of water breathing",
+    "type": "origins:action_over_time",
+    "interval": 1,
+    "condition": {
+        "type": "origins:submerged_in",
+        "fluid": "minecraft:water"
+    },
+    "rising_action": {
+        "type": "origins:if_else",
+        "condition": {
+            "type": "origins:air",
+            "comparison": ">=",
+            "compare_to": 299
+        },
+        "if_action": {
+            "type": "origins:apply_effect",
+            "effect": {
+                "effect": "minecraft:water_breathing",
+                "duration": 1200,
+                "show_particles": false
+            }
+        }
+    },
+    "falling_action": {
+        "type": "origins:if_else",
+        "condition": {
+            "type": "origins:status_effect",
+            "effect": "minecraft:water_breathing",
+            "max_duration": 1200
+        },
+        "if_action": {
+            "type": "origins:clear_effect",
+            "effect": "minecraft:water_breathing"
+        }
+    }
+}

@@ -1,0 +1,36 @@
+{
+    "name": "Cave Dweller",
+    "description": "• You gain increased light vision while not in water.\n\n•  You spawn in a mineshaft.\n\n• You have to sleep below sea level and without direct exposure to the sky.",
+    "type": "origins:multiple",
+    "night_vision": {
+        "type": "origins:night_vision",
+        "strength": 0.1,
+        "condition": {
+            "type": "origins:submerged_in",
+            "fluid": "minecraft:water",
+            "inverted": true
+        }
+    },
+    "mineshaft_spawn": {
+        "type": "origins:modify_player_spawn",
+        "dimension": "minecraft:overworld",
+        "structure": "minecraft:mineshaft"
+    },
+    "deep_sleep": {
+        "type": "origins:prevent_sleep",
+        "message": "It's too high to sleep. You must sleep below sea level (y<62)",
+        "block_condition": {
+            "type": "origins:height",
+            "comparison": "<",
+            "compare_to": 62,
+            "inverted": true
+        }
+    },
+    "cave_sleep": {
+        "type": "origins:prevent_sleep",
+        "message": "The sky to too bright to sleep. You must sleep underground",
+        "block_condition": {
+            "type": "origins:exposed_to_sky"
+        }
+    }
+}

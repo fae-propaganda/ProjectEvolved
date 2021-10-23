@@ -13,7 +13,10 @@
 		"evolved:snowy_foxkin/small",
 		
 		"evolved:snowy_foxkin/unwieldly",
-		"evolved:snowy_foxkin/weak_arms"
+		"evolved:snowy_foxkin/weak_arms",
+		"evolved:snowy_foxkin/pounce",
+
+		"evolved:snowy_foxkin/nimble"
 	],
 	"icon": "minecraft:sweet_berries",
 	"order": 10,
